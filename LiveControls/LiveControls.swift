@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+        SimpleEntry(date: Date())
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+        let entry = SimpleEntry(date: Date())
         completion(entry)
     }
 
@@ -25,7 +25,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
+            let entry = SimpleEntry(date: entryDate)
             entries.append(entry)
         }
 
@@ -40,25 +40,41 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let emoji: String
 }
 
 struct LiveControlsEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Emoji:")
-            Text(entry.emoji)
+        ZStack {
+            Image("GenuineAlbum")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .scaleEffect(1.5)
+                .blur(radius: 16)
+//                .clipShape(.capsule)
+            VStack (alignment: .center, spacing: 10) {
+                Text("Y Que Fue?")
+                    .font(.title3)
+                    .fontWeight(.regular)
+                    .fontWidth(.expanded)
+                    .foregroundStyle(.white)
+                Button {
+                    
+                } label: {
+                    Image(systemName: "play")
+                        .font(.title3)
+                        .foregroundStyle(.white)
+                }
+                .buttonBorderShape(.circle)
+                .buttonStyle(.plain)
+            }
         }
     }
 }
 
 struct LiveControls: Widget {
-    let kind: String = "LiveControls"
+    let kind: String = "Corn Standard"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
@@ -67,18 +83,17 @@ struct LiveControls: Widget {
                     .containerBackground(.fill.tertiary, for: .widget)
             } else {
                 LiveControlsEntryView(entry: entry)
-                    .padding()
+                //  .padding()
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Corn Audio")
+        .description("Hear the most without opening the app")
     }
 }
 
-#Preview(as: .systemSmall) {
+#Preview(as: .systemExtraLarge) {
     LiveControls()
 } timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+    SimpleEntry(date: .now)
 }

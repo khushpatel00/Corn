@@ -36,7 +36,7 @@ struct ContentView: View {
                     .padding(isPlaying ? 16 : 48)
                 //                    .scaleEffect(scaleFactor)
             } else {
-                Image("GenuineAlbum")
+                Image("GenuineAlbumv2")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .overlay(alignment: .bottomTrailing) {
@@ -116,7 +116,7 @@ struct ContentView: View {
         }
         .onAppear {
             guard let sound = Bundle.main.url(
-                forResource: "somebanger1",
+                forResource: "somebanger3",
                 withExtension: "mp3"
             ) else {
                 print("Audio file not found")

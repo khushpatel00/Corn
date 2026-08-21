@@ -44,6 +44,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1A12FCD5303871B4009C9C7B /* Exceptions for "LiveControls" folder in "Corn" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+			);
+			target = 1A1BBEE83032F53E00F975A8 /* Corn */;
+		};
 		1AC6C6B330373297005A8AEA /* Exceptions for "Corn" folder in "Corn" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -54,6 +61,7 @@
 		1AC6C6B5303732F6005A8AEA /* Exceptions for "Corn" folder in "LiveControlsExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
 				MusicLiveAttributes.swift,
 			);
 			target = 1AF699BD303702E700382A0B /* LiveControlsExtension */;
@@ -80,6 +88,7 @@
 		1AF699C4303702E800382A0B /* LiveControls */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				1A12FCD5303871B4009C9C7B /* Exceptions for "LiveControls" folder in "Corn" target */,
 				1AF699D1303702EA00382A0B /* Exceptions for "LiveControls" folder in "LiveControlsExtension" target */,
 			);
 			path = LiveControls;
