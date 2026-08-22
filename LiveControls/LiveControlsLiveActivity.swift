@@ -65,7 +65,7 @@ struct LiveControlsLiveActivity: Widget {
                         .padding(.top, 12)
                         
                         Spacer()
-                        Image(systemName: "play")
+                        Image(systemName: "pause")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .padding(.horizontal)

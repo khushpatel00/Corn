@@ -30,7 +30,7 @@ final class HostController: ObservableObject {
 		}
 		do {
 			host = try AVAudioPlayer(contentsOf: sound)
-			//host.isMeteringEnabled = true
+			host.isMeteringEnabled = true
 			host.prepareToPlay()
 			
 		} catch {
@@ -75,4 +75,56 @@ final class HostController: ObservableObject {
 		}
 	}
 	
+	
+	public func startVisualizer() {
+		@State var liveScaling: Timer?
+
+		liveScaling?.invalidate()
+		
+		liveScaling = Timer.scheduledTimer(
+			withTimeInterval: 1.0 / 30.0,
+			repeats: true
+		) { _ in
+			guard self.host != nil, self.host.isPlaying else {
+				return
+			}
+			
+			self.host.updateMeters()
+			
+			let leftPower = self.host.averagePower(forChannel: 0)
+			
+			let rightPower: Float
+			
+			if self.host.numberOfChannels > 1 {
+				rightPower = self.host.averagePower(forChannel: 1)
+			} else {
+				rightPower = leftPower
+			}
+			
+			// Average both stereo channels.
+			let power = (leftPower + rightPower) / 2
+			
+			// Convert dB (-60...0) into a normalized 0...1 value.
+			let normalizedPower = max(
+				0,
+				min(
+					1,
+					(power + 60) / 60
+				)
+			)
+			
+			// Convert the audio level into an album scale.
+			//
+			// 0.0 power -> 1.00x
+			// 1.0 power -> 1.15x
+			let newScale = 1.0 + CGFloat(normalizedPower) * 0.15
+			
+			DispatchQueue.main.async {
+				withAnimation(.easeOut(duration: 0.08)) {
+					self.scaleFactor = newScale
+				}
+			}
+		}
+		
+	}
 }

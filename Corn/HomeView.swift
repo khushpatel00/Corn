@@ -39,7 +39,21 @@ struct HomeView: View {
 							isPlayerVisible.toggle()
 						}
 					}
-				Text("Now Playing")
+				HStack {
+					VStack (alignment: .leading, spacing: 0) {
+						Text("Now Playing")
+//							.font(.caption2)
+							.font(.custom("", size: 9, relativeTo: .caption2))
+							.fontWeight(.light)
+							.fontDesign(.rounded)
+						Text("Sau Paulo")
+							.font(.title3)
+							.fontWidth(.expanded)
+							.fontWeight(.regular)
+					}
+					.padding(8)
+					Spacer()
+				}
 				Spacer()
 				Button(action: {
 					if host.isPlaying {
@@ -54,7 +68,7 @@ struct HomeView: View {
 			}
 			.padding()
 			.background(.ultraThinMaterial)
-			.cornerRadius(12)
+			.clipShape(.capsule)
 		}
     }
 }
